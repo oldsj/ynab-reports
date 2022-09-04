@@ -9,8 +9,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # - name: Build report
+      - name: Check out repo
+        uses: actions/checkout@v2
 
+      # - name: Build report
 
       - name: Send report
         uses: dawidd6/action-send-mail@6d23605227c578d570e5594931720f85a1af55a2 #v3.6.1
