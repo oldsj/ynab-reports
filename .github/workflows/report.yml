@@ -1,16 +1,16 @@
-name: Build and Send Report
+name: Send YNAB Reports
 on:
   # schedule:
   # * is a special character in YAML so you have to quote this string
   # - cron:  '30 5,17 * * *'
   workflow_dispatch:
 jobs:
-  build:
+  main:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repo
         uses: actions/checkout@v3
-      - name: setup python
+      - name: Setup python
         uses: actions/setup-python@v4
         with:
           python-version: "3.10"
@@ -18,9 +18,6 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-  run:
-    runs-on: ubuntu-latest
-    steps:
       - name: Send report
         env:
           MAIL_DEFAULT_SENDER: ${{ secrets.MAIL_DEFAULT_SENDER }}
