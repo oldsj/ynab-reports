@@ -4,7 +4,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-recipients = os.getenv("MAIL_RECIPIENTS").split(",")
+recipients = os.getenv("MAIL_RECIPIENTS")
+print(type(recipients))
+print(recipients)
+recipients = recipients.split(",")
+print(type(recipients))
+print(recipients)
+
 mail_user = os.getenv("MAIL_USERNAME")
 mail_password = os.getenv("MAIL_PASSWORD")
 mail_host = os.getenv("MAIL_SERVER")
