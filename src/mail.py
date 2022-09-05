@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# send email
 recipients = os.getenv("MAIL_RECIPIENTS").split(",")
 mail_user = os.getenv("MAIL_USERNAME")
 mail_password = os.getenv("MAIL_PASSWORD")
@@ -16,7 +15,7 @@ email = EmailSender(
     host=mail_host, port=mail_port, username=mail_user, password=mail_password
 )
 email.receivers = recipients
-email.set_template_paths(html=".")
+email.set_template_paths(html="src")
 
 
 def send_report(fig):

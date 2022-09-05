@@ -20,4 +20,4 @@ jobs:
 
       - name: Send report
         run: |
-          python graph.py
+          python src/graph.py
