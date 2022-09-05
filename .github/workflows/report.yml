@@ -19,5 +19,12 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Send report
+        env:
+          MAIL_DEFAULT_SENDER: ${{ secrets.MAIL_DEFAULT_SENDER }}
+          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+          MAIL_PORT: ${{ secrets.MAIL_PORT }}
+          MAIL_RECIPIENTS: ${{ secrets.MAIL_RECIPIENTS }}
+          MAIL_SERVER: ${{ secrets.MAIL_SERVER }}
         run: |
           python src/graph.py

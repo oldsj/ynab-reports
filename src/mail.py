@@ -4,12 +4,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-os.system('env').read()
-print(output)
 recipients = os.getenv("MAIL_RECIPIENTS")
-
 recipients = recipients.split(",")
-
 
 mail_user = os.getenv("MAIL_USERNAME")
 mail_password = os.getenv("MAIL_PASSWORD")
