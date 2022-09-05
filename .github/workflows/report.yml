@@ -18,6 +18,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+  run:
+    runs-on: ubuntu-latest
+    steps:
       - name: Send report
         env:
           MAIL_DEFAULT_SENDER: ${{ secrets.MAIL_DEFAULT_SENDER }}
