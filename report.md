@@ -1,1 +1,0 @@
-![YNAB Report](./report.png)
