@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# TODO handle missing or improper env
 recipients = os.getenv("MAIL_RECIPIENTS")
 recipients = recipients.split(",")
 
