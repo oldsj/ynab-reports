@@ -1,17 +1,22 @@
-import os
 import json
 from pprint import pprint
-from dotenv import load_dotenv
-import requests
+from ynab.config import get_ynab_config
+import ynab_api
+from ynab_api.api import months_api
+from ynab_api.model.month_summaries_response import MonthSummariesResponse
+from ynab_api.model.error_response import ErrorResponse
 
-load_dotenv()
 
-ynab_api = "https://api.youneedabudget.com/v1"
-api_key = os.getenv("YNAB_API_KEY")
-budget_id = os.getenv("YNAB_BUDGET_ID")
-headers = {"accept": "application/json", "Authorization": f"Bearer {api_key}"}
+api_config, config = get_ynab_config()
 
-categories = requests.get(f"{ynab_api}/budgets/{budget_id}/categories", headers=headers)
-category_groups = categories.json()["data"]["category_groups"]
-
-pprint(category_groups)
+with ynab_api.ApiClient(api_config) as api_client:
+    api_instance = months_api.MonthsApi(api_client)
+    budget_id = config[
+        "budget_id"
+    ]  
+    try:
+        # List budget months
+        api_response = api_instance.get_budget_months(budget_id)
+        pprint(api_response)
+    except ynab_api.ApiException as e:
+        print("Exception when calling MonthsApi->get_budget_months: %s\n" % e)
