@@ -1,6 +1,6 @@
-from ynab.api import get_all_transactions
+from ynab.reporting import get_top_flows
 from pprint import pprint
 
-transactions = get_all_transactions()
-for transaction in transactions:
-    pprint(transaction)
+df_in, df_out = get_top_flows(year=2022, month=8, n_rows=10)
+
+print(df_in.to_html())

@@ -21,7 +21,7 @@ email.receivers = recipients
 email.set_template_paths(html="src")
 
 
-def send_report(fig):
+def send_report(fig, time_to_fi: str, top_flows):
     email.send(
         sender=f"{mail_sender} <{mail_user}>",
         subject="YNAB Report",
@@ -29,4 +29,8 @@ def send_report(fig):
         body_images={
             "report_plot": fig,
         },
+        body_params={
+            "time_to_fi": time_to_fi,
+            "top_flows": top_flows
+        }
     )
