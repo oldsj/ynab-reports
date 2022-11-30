@@ -43,5 +43,5 @@ plt.plot(
 plt.legend()
 # plt.show()
 
-time_to_fi = 
+time_to_fi = "1" 
 send_report(fig, time_to_fi)

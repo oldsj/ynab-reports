@@ -1,6 +1,7 @@
 import os
 from redmail import EmailSender
 from dotenv import load_dotenv
+from ynab.reporting import *
 
 load_dotenv()
 
@@ -21,16 +22,27 @@ email.receivers = recipients
 email.set_template_paths(html="src")
 
 
-def send_report(fig, time_to_fi: str, top_flows):
+def send_report(fig, time_to_fi: str):
+    year = 2022
+    month = 11
+    float_format = "%.2f"
+    df_financial_snapshot = calculate_financial_snapshot(year=year, month=month)
+    snapshot = df_financial_snapshot.to_html()
+    df_top_in, df_top_out = get_top_flows(year=year, month=month, n_rows=10)
+    top_inflows = df_top_in.to_html()
+    top_outflows = df_top_out.to_html()
+
     email.send(
         sender=f"{mail_sender} <{mail_user}>",
         subject="YNAB Report",
-        html_template="report.html.j2",
+        html_template="templates/report.html.j2",
         body_images={
-            "report_plot": fig,
+            "fi_plot": fig,
         },
         body_params={
             "time_to_fi": time_to_fi,
-            "top_flows": top_flows
+            "top_inflows": top_inflows,
+            "top_outflows": top_outflows,
+            "snapshot": snapshot
         }
     )
