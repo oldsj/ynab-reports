@@ -27,10 +27,10 @@ def send_report(fig, time_to_fi: str):
     month = 11
     float_format = "%.2f"
     df_financial_snapshot = calculate_financial_snapshot(year=year, month=month)
-    snapshot = df_financial_snapshot.to_html()
+    snapshot = df_financial_snapshot
     df_top_in, df_top_out = get_top_flows(year=year, month=month, n_rows=10)
-    top_inflows = df_top_in.to_html()
-    top_outflows = df_top_out.to_html()
+    top_inflows = df_top_in
+    top_outflows = df_top_out
 
     email.send(
         sender=f"{mail_sender} <{mail_user}>",
@@ -41,6 +41,8 @@ def send_report(fig, time_to_fi: str):
         },
         body_params={
             "time_to_fi": time_to_fi,
+        },
+        body_tables={
             "top_inflows": top_inflows,
             "top_outflows": top_outflows,
             "snapshot": snapshot
