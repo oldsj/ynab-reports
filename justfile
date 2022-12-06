@@ -3,3 +3,6 @@ venv:
 
 send-report: venv
     python src/report.py
+
+send-wrapped: venv
+    python src/wrapped.py

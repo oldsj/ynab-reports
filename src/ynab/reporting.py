@@ -5,6 +5,7 @@ from datetime import datetime
 import numpy as np
 import pandas as pd
 from ynab.wrangling import calculate_daily_balances, get_ynab_dataset
+import math
 
 MONTHS = [
     "January",
@@ -166,3 +167,14 @@ def calculate_monthly_flows(year, month):
     # Remove first row (initial balance is counted as inflow)
     df = df.iloc[1:]
     return df
+
+def calculate_payee_yearly(payee: str, year: int) -> int:
+    df = get_ynab_dataset()
+    df = df.loc[lambda d: (d.date.dt.year == year)]
+    df["date"] = df.date.dt.strftime("%b-%d")
+    mask = df['payee_name'].str.lower().isin([payee])
+    df = df[mask]
+    columns = ["date", "payee_name", "amount"]
+    df = df[columns]
+    total = df["amount"].sum()
+    return total

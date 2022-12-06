@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from mail import send_report
+from mail import *
 
 fig = plt.figure()
 # Data
@@ -43,5 +43,6 @@ plt.plot(
 plt.legend()
 # plt.show()
 
-time_to_fi = "1" 
-send_report(fig, time_to_fi)
+
+send_report(fig)
+

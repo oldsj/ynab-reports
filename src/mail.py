@@ -22,7 +22,7 @@ email.receivers = recipients
 email.set_template_paths(html="src")
 
 
-def send_report(fig, time_to_fi: str):
+def send_report(fig):
     year = 2022
     month = 11
     float_format = "%.2f"
@@ -40,7 +40,7 @@ def send_report(fig, time_to_fi: str):
             "fi_plot": fig,
         },
         body_params={
-            "time_to_fi": time_to_fi,
+            "time_to_fi": "1",
         },
         body_tables={
             "top_inflows": top_inflows,
